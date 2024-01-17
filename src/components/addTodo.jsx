@@ -1,8 +1,33 @@
 import React from 'react'
+import {useDispatch} from "react-redux"
+import { addTodo } from '../store/feature/todoSlice';
 
 function addTodo() {
+    const [input , setInput] = React.useState("");
+
+    const dispatch = useDispatch()
+    const addTodoHandler = (e)=>  {
+        e.preventDefault()
+        dispatch(addTodo(input))
+        setInput("")
+    }
+
   return (
-    <div>addTodo</div>
+    <form onSubmit={addTodoHandler} >
+    <input 
+        type='text'
+        className=''
+        placeholder='Enter Todo'
+        value={input}
+        onChange={(e)=> setInput(e.target.value)}
+    />
+
+    <button
+        type='submit'
+        className=''
+    >Add Todo</button>
+    
+    </form>
   )
 }
 
